@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
+
 function App() {
   const [view, setView] = useState('login')
   const [formData, setFormData] = useState({ username: '', password: '' })
@@ -28,7 +30,7 @@ function App() {
     setSuccess('')
 
     try {
-      const response = await fetch('http://localhost:3000/api/register', {
+      const response = await fetch(`${API_URL}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -60,7 +62,7 @@ function App() {
     setSuccess('')
 
     try {
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch(`${API_URL}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -73,7 +75,7 @@ function App() {
         setSuccess('Login successful!')
         setFormData({ username: '', password: '' })
         // Fetch user data from protected endpoint
-        const userResponse = await fetch('http://localhost:3000/api/me', {
+        const userResponse = await fetch(`${API_URL}/api/me`, {
           method: 'GET',
           credentials: 'include'
         })
